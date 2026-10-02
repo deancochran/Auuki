@@ -1,12 +1,16 @@
-import { decodeIndoorBikeData } from '@deancochran/ftms';
+import { decodeFtmsMeasurement, FTMS_CHARACTERISTICS } from '@deancochran/ftms';
 
 function IndoorBikeData() {
     function decode(view) {
         const bytes = new Uint8Array(view.buffer, view.byteOffset, view.byteLength);
-        const { measurement, raw } = decodeIndoorBikeData(bytes, {
+        const reading = decodeFtmsMeasurement(FTMS_CHARACTERISTICS.INDOOR_BIKE_DATA, bytes, {
             // Preserve the two-byte layout already used by Auuki.
             resistanceFormat: 'signed16Tenths',
         });
+        if (reading.status !== 'known') {
+            throw new Error('FTMS decoder does not support Indoor Bike Data');
+        }
+        const { metrics: measurement, raw } = reading;
 
         const data = {
             speed: measurement.speedKph,
