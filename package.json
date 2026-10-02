@@ -8,6 +8,9 @@
         "process": "^0.11.10"
     },
     "source": "src/index.html",
+    "@parcel/resolver-default": {
+        "packageExports": true
+    },
     "scripts": {
         "test": "jest",
         "start": "parcel",
@@ -15,6 +18,7 @@
         "build": "parcel build"
     },
     "dependencies": {
+        "@deancochran/ftms": "0.4.0",
         "@babel/core": "^7.13.13",
         "@babel/node": "^7.13.13",
         "parcel": "^2.12.0"
