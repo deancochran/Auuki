@@ -89,7 +89,7 @@ describe('Indoor Bike Data', () => {
         },
     );
 
-    test('retains the factory interface', () => {
+    test('retains the factory decode entry point', () => {
         expect(IndoorBikeData().decode(viewOf([0, 0, 0x10, 0x0e]))).toEqual({ speed: 36 });
     });
 
